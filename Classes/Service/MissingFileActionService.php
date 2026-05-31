@@ -7,6 +7,7 @@ use AndreasKiessling\Faltools\Dto\MissingFileDeletionResult;
 use AndreasKiessling\Faltools\Dto\MissingFileBulkDeletionResult;
 use AndreasKiessling\Faltools\Dto\MissingFileRestoreResult;
 use AndreasKiessling\Faltools\Exception\MissingFileNotFoundException;
+use AndreasKiessling\Faltools\Exception\MissingFileNoLongerMissingException;
 use AndreasKiessling\Faltools\Exception\MissingFilePermissionDeniedException;
 use AndreasKiessling\Faltools\Exception\MissingFileReferencedException;
 use AndreasKiessling\Faltools\Exception\MissingFileRestoreException;
@@ -44,7 +45,8 @@ final readonly class MissingFileActionService
         if ($file === null) {
             throw new MissingFileNotFoundException('Missing file record was not found.', 1780483201);
         }
-        $this->assertMissingFileAccess($file->uid, $file->storage, $file->identifier, 'delete');
+        $storage = $this->assertMissingFileAccess($file->uid, $file->storage, $file->identifier, 'delete');
+        $this->assertFileStillMissing($storage, $file->uid, $file->identifier);
         if ($file->hasReferences() && !$forceReferences) {
             throw new MissingFileReferencedException('Missing file record still has references.', 1780483202);
         }
@@ -133,6 +135,10 @@ final readonly class MissingFileActionService
                 $removedProcessedFiles += $result->removedProcessedFiles;
             } catch (MissingFileNotFoundException) {
                 // Concurrent cleanup is expected in bulk operations: a record may already be gone.
+                $skippedFiles++;
+                continue;
+            } catch (MissingFileNoLongerMissingException) {
+                // File was restored between list rendering and delete action.
                 $skippedFiles++;
                 continue;
             } catch (\Throwable) {
@@ -291,5 +297,21 @@ final readonly class MissingFileActionService
         }
 
         return $storage;
+    }
+
+    private function assertFileStillMissing(ResourceStorage $storage, int $fileUid, string $identifier): void
+    {
+        if (!$storage->hasFile($identifier)) {
+            return;
+        }
+
+        // Keep sys_file state in sync if file reappeared in storage before delete action.
+        $indexer = GeneralUtility::makeInstance(Indexer::class, $storage);
+        $indexer->updateIndexEntry($storage->getFile($identifier));
+
+        throw new MissingFileNoLongerMissingException(
+            'The file is no longer missing. Please reload the module.',
+            1780483210
+        );
     }
 }

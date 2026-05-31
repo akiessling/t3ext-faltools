@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace AndreasKiessling\Faltools\Controller;
 
 use AndreasKiessling\Faltools\Exception\MissingFilePermissionDeniedException;
+use AndreasKiessling\Faltools\Exception\MissingFileNoLongerMissingException;
 use AndreasKiessling\Faltools\Exception\MissingFileReferencedException;
 use AndreasKiessling\Faltools\Exception\MissingFileActionException;
 use Psr\Http\Message\ResponseFactoryInterface;
@@ -175,6 +176,8 @@ final readonly class MissingFilesController
             ]);
         } catch (MissingFilePermissionDeniedException $exception) {
             return $this->errorJsonResponse('delete.error.title', $exception->getMessage(), 403);
+        } catch (MissingFileNoLongerMissingException $exception) {
+            return $this->errorJsonResponse('delete.error.title', $exception->getMessage(), 409);
         } catch (MissingFileReferencedException $exception) {
             return $this->errorJsonResponse('delete.error.title', $exception->getMessage(), 409);
         } catch (MissingFileActionException $exception) {
