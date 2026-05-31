@@ -41,10 +41,11 @@ final readonly class MissingFilesTreeController
     {
         $selectedStorage = $this->resolveSelectedStorage($request);
         $tree = $this->treeBuilder->build($this->missingFileRepository->findMissingFileTreeRows($selectedStorage));
+        $storageOptions = $this->missingFileRepository->getStorageNames();
 
         return new JsonResponse([
             'nodes' => array_map($this->serializeNode(...), $tree),
-            'storageOptions' => $this->missingFileRepository->getStorageNames(),
+            'storageOptions' => $storageOptions,
             'selectedStorage' => $selectedStorage,
             'moduleUrl' => (string)$this->uriBuilder->buildUriFromRoute('file_faltools_missing'),
             'labels' => $this->buildLabels(),
@@ -104,8 +105,12 @@ final readonly class MissingFilesTreeController
     private function resolveSelectedStorage(ServerRequestInterface $request): ?int
     {
         $queryParams = $request->getQueryParams();
-        return isset($queryParams['storage']) && (int)$queryParams['storage'] > 0
-            ? (int)$queryParams['storage']
-            : null;
+        if (isset($queryParams['storage']) && (int)$queryParams['storage'] > 0) {
+            return (int)$queryParams['storage'];
+        }
+
+        $storageNames = $this->missingFileRepository->getStorageNames();
+        $firstStorage = array_key_first($storageNames);
+        return $firstStorage !== null ? (int)$firstStorage : null;
     }
 }

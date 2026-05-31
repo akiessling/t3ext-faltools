@@ -47,12 +47,12 @@ class MissingFilesTree extends LitElement {
     super.disconnectedCallback();
   }
 
-  async loadTree() {
+  async loadTree(storageOverride = null) {
     this.loading = true;
     this.error = "";
 
     try {
-      const response = await fetch(this.buildTreeRequestUrl(), {
+      const response = await fetch(this.buildTreeRequestUrl(storageOverride), {
         credentials: "same-origin",
       });
       if (!response.ok) {
@@ -78,8 +78,8 @@ class MissingFilesTree extends LitElement {
     return new URLSearchParams(url.search);
   }
 
-  buildTreeRequestUrl() {
-    const selectedStorage = this.getCurrentContentParams().get("storage");
+  buildTreeRequestUrl(storageOverride = null) {
+    const selectedStorage = storageOverride ?? this.getCurrentContentParams().get("storage");
     const treeUrl = new URL(top.TYPO3.settings.ajaxUrls.faltools_missing_files_tree, top.location.origin);
     if (selectedStorage !== null && selectedStorage !== "") {
       treeUrl.searchParams.set("storage", selectedStorage);
@@ -97,15 +97,15 @@ class MissingFilesTree extends LitElement {
 
   handleStorageChange(event) {
     const storageValue = event.target.value;
+    this.selectedStorage = storageValue !== "" ? Number.parseInt(storageValue, 10) : null;
+    this.activeUrl = "";
+    this.loadTree(storageValue);
+
     // Reset to page 1 and clear folder filter whenever storage scope changes.
     const targetUrl = new URL(this.moduleUrl || top.TYPO3.Backend.ContentContainer?.url || "", top.location.origin);
     targetUrl.searchParams.set("page", "1");
     targetUrl.searchParams.delete("path");
-    if (storageValue === "") {
-      targetUrl.searchParams.delete("storage");
-    } else {
-      targetUrl.searchParams.set("storage", storageValue);
-    }
+    targetUrl.searchParams.set("storage", storageValue);
     top.TYPO3.Backend.ContentContainer.setUrl(targetUrl.toString());
   }
 
@@ -122,7 +122,20 @@ class MissingFilesTree extends LitElement {
           min-height: 0;
         }
 
+        .scaffold-content-navigation-component,
+        .scaffold-content-navigation-component .navigation-tree-container,
+        .scaffold-content-navigation-component .tree {
+          flex: 1 1 auto !important;
+          min-height: 0;
+        }
+
+        .scaffold-content-navigation-component .tree > div {
+          flex: 0 0 auto !important;
+        }
+
         .faltools-missing-tree {
+          display: flex;
+          flex-direction: column;
           gap: .5rem;
           padding: var(--typo3-spacing);
           padding-block-start: calc(var(--typo3-spacing) + 2rem);
@@ -147,7 +160,7 @@ class MissingFilesTree extends LitElement {
         }
 
         .faltools-missing-tree__body {
-          flex: 1 1 0;
+          flex: 1 1 auto !important;
           min-height: 0;
           overflow: auto;
         }
@@ -224,7 +237,6 @@ class MissingFilesTree extends LitElement {
                   .value=${this.selectedStorage !== null ? String(this.selectedStorage) : ""}
                   @change=${this.handleStorageChange}
                 >
-                  <option value="">${this.translate("treeAllStorages", "All storages")}</option>
                   ${storageEntries.map(
                     ([uid, name]) => html`<option value=${uid}>${name} [${uid}]</option>`,
                   )}

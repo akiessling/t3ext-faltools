@@ -8,6 +8,7 @@ use TYPO3\CMS\Core\Database\Connection;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Database\ReferenceIndex;
+use TYPO3\CMS\Core\Authentication\BackendUserAuthentication;
 use TYPO3\CMS\Core\Resource\ResourceFactory;
 use TYPO3\CMS\Core\Resource\ResourceStorage;
 use TYPO3\CMS\Core\Resource\StorageRepository;
@@ -213,12 +214,26 @@ final readonly class MissingFileRepository
     {
         $storageNames = [];
         foreach ($this->storageRepository->findAll() as $storage) {
-            if (!$storage instanceof ResourceStorage || $storage->isFallbackStorage()) {
+            if (
+                !$storage instanceof ResourceStorage
+                || $storage->isFallbackStorage()
+                || !$this->isStorageAccessibleForCurrentUser($storage)
+            ) {
                 continue;
             }
             $storageNames[$storage->getUid()] = $storage->getName();
         }
         return $storageNames;
+    }
+
+    private function isStorageAccessibleForCurrentUser(ResourceStorage $storage): bool
+    {
+        if ($storage->getFileMounts() !== []) {
+            return true;
+        }
+
+        $backendUser = $GLOBALS['BE_USER'] ?? null;
+        return $backendUser instanceof BackendUserAuthentication && $backendUser->isAdmin();
     }
 
     private function countReferencesFromRefIndex(int $fileUid): int

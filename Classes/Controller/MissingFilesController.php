@@ -43,10 +43,8 @@ final readonly class MissingFilesController
     public function handleRequest(ServerRequestInterface $request): ResponseInterface
     {
         $languageService = $this->getLanguageService();
+        $selectedStorage = $this->resolveSelectedStorage($request);
         $queryParams = $request->getQueryParams();
-        $selectedStorage = isset($queryParams['storage']) && (int)$queryParams['storage'] > 0
-            ? (int)$queryParams['storage']
-            : null;
         $selectedPath = $this->normalizePath((string)($queryParams['path'] ?? ''));
         $requestedPage = isset($queryParams['page']) ? (int)$queryParams['page'] : 1;
 
@@ -276,6 +274,18 @@ final readonly class MissingFilesController
         }
 
         return $pages;
+    }
+
+    private function resolveSelectedStorage(ServerRequestInterface $request): ?int
+    {
+        $queryParams = $request->getQueryParams();
+        if (isset($queryParams['storage']) && (int)$queryParams['storage'] > 0) {
+            return (int)$queryParams['storage'];
+        }
+
+        $storageNames = $this->missingFileRepository->getStorageNames();
+        $firstStorage = array_key_first($storageNames);
+        return $firstStorage !== null ? (int)$firstStorage : null;
     }
 
     private function buildModuleUrl(?int $selectedStorage, int $page, string $path = ''): string
