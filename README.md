@@ -44,6 +44,9 @@ Module in the **File** main section with:
 - pagination for large datasets
 - reference count display (excluding pure metadata self-relations)
 
+Important:
+- The module view is based on the persisted FAL index state (`sys_file`) and not on live file-system checks.
+- Keep the storage index up to date (Scheduler or `faltools:index-storage`) before interpreting results, including the case where no missing files are currently listed.
 ### Per-file actions
 
 - open file URL (if available)

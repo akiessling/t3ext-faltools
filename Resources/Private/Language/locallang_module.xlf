@@ -129,6 +129,12 @@
             <trans-unit id="empty.message">
                 <source>The current filter does not match any sys_file records marked as missing.</source>
             </trans-unit>
+            <trans-unit id="notice.indexState.title">
+                <source>Index status notice</source>
+            </trans-unit>
+            <trans-unit id="notice.indexState.message">
+                <source>This module is based on the current FAL index state and does not provide live file-system information. Ensure storage indexing is up to date before evaluating the result.</source>
+            </trans-unit>
             <trans-unit id="paging.label">
                 <source>Missing files pages</source>
             </trans-unit>

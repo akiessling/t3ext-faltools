@@ -171,6 +171,14 @@
                 <source>The current filter does not match any sys_file records marked as missing.</source>
                 <target>Der aktuelle Filter findet keine als fehlend markierten sys_file-Datensätze.</target>
             </trans-unit>
+            <trans-unit id="notice.indexState.title">
+                <source>Index status notice</source>
+                <target>Hinweis zum Indexstand</target>
+            </trans-unit>
+            <trans-unit id="notice.indexState.message">
+                <source>This module is based on the current FAL index state and does not provide live file-system information. Ensure storage indexing is up to date before evaluating the result.</source>
+                <target>Dieses Modul basiert auf dem aktuellen FAL-Indexstand und liefert keine Live-Informationen aus dem Dateisystem. Stelle vor der Bewertung der Ergebnisse sicher, dass der Storage-Index aktuell ist.</target>
+            </trans-unit>
             <trans-unit id="paging.label">
                 <source>Missing files pages</source>
                 <target>Seiten der fehlenden Dateien</target>
