@@ -1,0 +1,43 @@
+{
+    "name": "andreaskiessling/faltools",
+    "type": "typo3-cms-extension",
+    "description": "CLI tools for TYPO3 file storage indexing.",
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "php": "^8.2",
+        "typo3/cms-core": "^13.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^11.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "AndreasKiessling\\Faltools\\": "Classes/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AndreasKiessling\\Faltools\\Tests\\": "Tests/"
+        }
+    },
+    "config": {
+        "bin-dir": ".Build/bin",
+        "lock": false,
+        "sort-packages": true,
+        "vendor-dir": ".Build/vendor",
+        "allow-plugins": {
+            "typo3/class-alias-loader": true,
+            "typo3/cms-composer-installers": true
+        }
+    },
+    "scripts": {
+        "test": "phpunit --colors=always -c phpunit.xml.dist"
+    },
+    "extra": {
+        "typo3/cms": {
+            "app-dir": ".Build",
+            "extension-key": "faltools",
+            "web-dir": ".Build/Web"
+        }
+    }
+}

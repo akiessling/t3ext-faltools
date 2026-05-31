@@ -1,0 +1,53 @@
+.faltools-missing-files {
+    max-width: 1480px;
+}
+
+.faltools-missing-files__filter {
+    max-width: 28rem;
+}
+
+.faltools-missing-files__summary {
+    max-width: 28rem;
+}
+
+.faltools-missing-files__table {
+    width: auto;
+    min-width: 100%;
+}
+
+.faltools-missing-files__table th:nth-child(1),
+.faltools-missing-files__table td:nth-child(1),
+.faltools-missing-files__table th:nth-child(3),
+.faltools-missing-files__table td:nth-child(3),
+.faltools-missing-files__table th:nth-child(4),
+.faltools-missing-files__table td:nth-child(4),
+.faltools-missing-files__table th:nth-child(5),
+.faltools-missing-files__table td:nth-child(5),
+.faltools-missing-files__table th:nth-child(6),
+.faltools-missing-files__table td:nth-child(6) {
+    width: 1%;
+    white-space: nowrap;
+}
+
+.faltools-missing-files__table td:nth-child(6) .btn + .btn {
+    margin-left: .25rem;
+}
+
+.faltools-missing-files__bulk-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: .5rem;
+}
+
+.faltools-missing-files__path {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.faltools-missing-files__pagination {
+    margin: 1rem 0;
+}
+
+.faltools-missing-files__list {
+    min-width: 0;
+}

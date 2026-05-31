@@ -1,0 +1,255 @@
+<html
+    xmlns:f="http://typo3.org/ns/TYPO3/CMS/Fluid/ViewHelpers"
+    xmlns:core="http://typo3.org/ns/TYPO3/CMS/Core/ViewHelpers"
+    data-namespace-typo3-fluid="true"
+>
+
+<f:layout name="Module" />
+
+<f:section name="Content">
+    <div class="faltools-missing-files">
+    <h1><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:headline" /></h1>
+
+    <div class="row mb-3">
+        <div class="col-12 col-md-3">
+            <div class="table-fit">
+                <table class="table table-sm faltools-missing-files__summary">
+                    <tbody>
+                        <tr>
+                            <th scope="row"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:summary.total" /></th>
+                            <td>{totalFiles}</td>
+                        </tr>
+                        <tr>
+                            <th scope="row"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:summary.referenced" /></th>
+                            <td>{referencedFiles}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="faltools-missing-files__list">
+        <f:if condition="{files}">
+            <f:then>
+                <f:render section="BulkActions" arguments="{_all}" />
+                <f:render section="Pagination" arguments="{_all}" />
+                <f:render section="FilesTable" arguments="{_all}" />
+                <f:render section="Pagination" arguments="{_all}" />
+            </f:then>
+            <f:else>
+                <div class="callout callout-info">
+                    <div class="media">
+                        <div class="media-left">
+                            <core:icon identifier="actions-check" size="large" />
+                        </div>
+                        <div class="media-body">
+                            <h4 class="callout-title">
+                                <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:empty.title" />
+                            </h4>
+                            <p>
+                                <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:empty.message" />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </f:else>
+        </f:if>
+    </div>
+    </div>
+</f:section>
+
+<f:section name="BulkActions">
+    <div class="faltools-missing-files__bulk-actions mb-3">
+        <button
+            type="button"
+            class="btn btn-warning btn-sm"
+            data-faltools-bulk-delete="1"
+            data-scope="folder"
+            data-delete-url="{bulkDeleteActionUrl}"
+            data-return-url="{currentUrl}"
+            data-storage="{selectedStorage}"
+            data-path="{selectedPath}"
+            data-record-count="{folderFileCount}"
+            data-reference-count="{currentFilterReferencedFiles}"
+            data-confirm-title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.title')}"
+            data-confirm-message="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.folderMessage', arguments: {0: folderDeleteScopeLabel, 1: folderFileCount, 2: currentFilterReferencedFiles})}"
+            data-confirm-cancel="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.cancel')}"
+            data-confirm-delete="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.delete')}"
+            title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.folder')}"
+        >
+            <core:icon identifier="actions-delete" size="small" />
+            <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.folder" />
+        </button>
+        <button
+            type="button"
+            class="btn btn-warning btn-sm"
+            data-faltools-bulk-delete="1"
+            data-scope="page"
+            data-delete-url="{bulkDeleteActionUrl}"
+            data-return-url="{currentUrl}"
+            data-uids="{currentPageFileUids}"
+            data-record-count="{currentPageFileCount}"
+            data-reference-count="{currentPageReferencedFiles}"
+            data-confirm-title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.title')}"
+            data-confirm-message="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.pageMessage', arguments: {0: currentPageFileCount, 1: currentPageReferencedFiles})}"
+            data-confirm-cancel="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.cancel')}"
+            data-confirm-delete="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.confirm.delete')}"
+            title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.page')}"
+        >
+            <core:icon identifier="actions-delete" size="small" />
+            <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:bulkDelete.page" />
+        </button>
+    </div>
+</f:section>
+
+<f:section name="FilesTable">
+    <div class="table-fit">
+        <table class="table table-striped table-hover faltools-missing-files__table">
+            <thead>
+                <tr>
+                    <th scope="col"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:table.uid" /></th>
+                    <th scope="col"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:table.file" /></th>
+                    <th scope="col"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:table.size" /></th>
+                    <th scope="col"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:table.modified" /></th>
+                    <th scope="col"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:table.references" /></th>
+                    <th scope="col"><f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:table.actions" /></th>
+                </tr>
+            </thead>
+            <tbody>
+                <f:for each="{files}" as="file">
+                <tr>
+                    <td>{file.uid}</td>
+                    <td>
+                        <core:icon identifier="status-dialog-warning" size="small" />
+                        <strong>{file.name}</strong>
+                        <div class="text-muted small faltools-missing-files__path">{file.identifier}</div>
+                    </td>
+                    <td>{file.size -> f:format.bytes()}</td>
+                    <td>
+                        <f:if condition="{file.modificationDate}">
+                            <f:then>{file.modificationDate -> f:format.date(format: 'Y-m-d H:i')}</f:then>
+                            <f:else>-</f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{file.referenceCount}">
+                            <f:then><span class="badge badge-warning">{file.referenceCount}</span></f:then>
+                            <f:else><span class="badge badge-success">0</span></f:else>
+                        </f:if>
+                    </td>
+                    <td>
+                        <f:if condition="{file.publicUrl}">
+                            <f:then>
+                                <a
+                                    class="btn btn-default btn-sm"
+                                    href="{file.publicUrl}"
+                                    title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:action.view')}"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    <core:icon identifier="actions-view" size="small" />
+                                </a>
+                            </f:then>
+                            <f:else>
+                                <button
+                                    type="button"
+                                    class="btn btn-default btn-sm"
+                                    title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:action.viewUnavailable')}"
+                                    disabled="disabled"
+                                >
+                                    <core:icon identifier="actions-view" size="small" />
+                                </button>
+                            </f:else>
+                        </f:if>
+                        <button
+                            type="button"
+                            class="btn btn-default btn-sm"
+                            title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:action.restore')}"
+                            data-faltools-restore-file="1"
+                            data-restore-url="{restoreActionUrl}"
+                            data-return-url="{currentUrl}"
+                            data-uid="{file.uid}"
+                        >
+                            <core:icon identifier="actions-upload" size="small" />
+                        </button>
+                        <button
+                            type="button"
+                            class="btn btn-default btn-sm"
+                            title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:action.delete')}"
+                            data-faltools-delete-file="1"
+                            data-delete-url="{deleteActionUrl}"
+                            data-return-url="{currentUrl}"
+                            data-uid="{file.uid}"
+                            data-reference-count="{file.referenceCount}"
+                            data-confirm-title="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:delete.confirm.title')}"
+                            data-confirm-message="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:delete.confirm.message', arguments: {0: file.referenceCount})}"
+                            data-confirm-cancel="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:delete.confirm.cancel')}"
+                            data-confirm-delete="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:delete.confirm.delete')}"
+                        >
+                            <core:icon identifier="actions-delete" size="small" />
+                        </button>
+                    </td>
+                </tr>
+                </f:for>
+            </tbody>
+        </table>
+    </div>
+</f:section>
+
+<f:section name="Pagination">
+    <f:if condition="{totalPages} > 1">
+        <nav class="faltools-missing-files__pagination" aria-label="{f:translate(key: 'LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:paging.label')}">
+            <ul class="pagination pagination-sm">
+                <f:if condition="{previousPageUrl}">
+                    <f:then>
+                        <li class="page-item">
+                            <a class="page-link" href="{previousPageUrl}">
+                                <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:paging.previous" />
+                            </a>
+                        </li>
+                    </f:then>
+                    <f:else>
+                        <li class="page-item disabled">
+                            <span class="page-link">
+                                <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:paging.previous" />
+                            </span>
+                        </li>
+                    </f:else>
+                </f:if>
+
+                <f:for each="{paginationPages}" as="paginationPage">
+                    <li class="page-item {f:if(condition: paginationPage.current, then: 'active')}">
+                        <f:if condition="{paginationPage.current}">
+                            <f:then>
+                                <span class="page-link">{paginationPage.number}</span>
+                            </f:then>
+                            <f:else>
+                                <a class="page-link" href="{paginationPage.url}">{paginationPage.number}</a>
+                            </f:else>
+                        </f:if>
+                    </li>
+                </f:for>
+
+                <f:if condition="{nextPageUrl}">
+                    <f:then>
+                        <li class="page-item">
+                            <a class="page-link" href="{nextPageUrl}">
+                                <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:paging.next" />
+                            </a>
+                        </li>
+                    </f:then>
+                    <f:else>
+                        <li class="page-item disabled">
+                            <span class="page-link">
+                                <f:translate key="LLL:EXT:faltools/Resources/Private/Language/locallang_module.xlf:paging.next" />
+                            </span>
+                        </li>
+                    </f:else>
+                </f:if>
+            </ul>
+        </nav>
+    </f:if>
+</f:section>
+
+</html>

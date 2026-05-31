@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2026-05-30T00:00:00Z" product-name="faltools">
+        <header/>
+        <body>
+            <trans-unit id="mlang_tabs_tab">
+                <source>Missing files</source>
+                <target>Fehlende Dateien</target>
+            </trans-unit>
+            <trans-unit id="mlang_labels_tabdescr">
+                <source>List missing FAL index entries.</source>
+                <target>Fehlende FAL-Indexeinträge auflisten.</target>
+            </trans-unit>
+            <trans-unit id="headline">
+                <source>Missing files</source>
+                <target>Fehlende Dateien</target>
+            </trans-unit>
+            <trans-unit id="summary.total">
+                <source>Missing files</source>
+                <target>Fehlende Dateien</target>
+            </trans-unit>
+            <trans-unit id="summary.referenced">
+                <source>With references</source>
+                <target>Mit Referenzen</target>
+            </trans-unit>
+            <trans-unit id="table.uid">
+                <source>UID</source>
+                <target>UID</target>
+            </trans-unit>
+            <trans-unit id="table.file">
+                <source>File</source>
+                <target>Datei</target>
+            </trans-unit>
+            <trans-unit id="table.size">
+                <source>Size</source>
+                <target>Größe</target>
+            </trans-unit>
+            <trans-unit id="table.modified">
+                <source>Modified</source>
+                <target>Geändert</target>
+            </trans-unit>
+            <trans-unit id="table.references">
+                <source>References</source>
+                <target>Referenzen</target>
+            </trans-unit>
+            <trans-unit id="table.actions">
+                <source>Actions</source>
+                <target>Aktionen</target>
+            </trans-unit>
+            <trans-unit id="action.delete">
+                <source>Delete missing file entry</source>
+                <target>Fehlenden Dateieintrag löschen</target>
+            </trans-unit>
+            <trans-unit id="action.view">
+                <source>View file URL</source>
+                <target>Datei-URL aufrufen</target>
+            </trans-unit>
+            <trans-unit id="action.viewUnavailable">
+                <source>No public URL available</source>
+                <target>Keine öffentliche URL verfügbar</target>
+            </trans-unit>
+            <trans-unit id="action.restore">
+                <source>Restore missing file by upload</source>
+                <target>Fehlende Datei per Upload wiederherstellen</target>
+            </trans-unit>
+            <trans-unit id="action.exportCsv">
+                <source>Export missing files as CSV</source>
+                <target>Fehlende Dateien als CSV exportieren</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.folder">
+                <source>Delete all records in this folder</source>
+                <target>Alle Einträge in diesem Ordner löschen</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.page">
+                <source>Delete all records on this page</source>
+                <target>Alle Einträge der aktuellen Seite löschen</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.confirm.title">
+                <source>Delete missing file records?</source>
+                <target>Fehlende Dateieinträge löschen?</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.confirm.folderMessage">
+                <source>Delete all %2$d missing file records in folder "%1$s"? Referenced records: %3$d.</source>
+                <target>Alle %2$d fehlenden Dateieinträge im Ordner "%1$s" löschen? Dabei werden zusätzlich %3$d sys_file_reference-Datensätze entfernt.</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.confirm.pageMessage">
+                <source>Delete all %1$d missing file records on the current page? Referenced records: %2$d.</source>
+                <target>Alle %1$d fehlenden Dateieinträge auf der aktuellen Seite löschen? Dabei werden zusätzlich %2$d sys_file_reference-Datensätze entfernt.</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.confirm.cancel">
+                <source>Cancel</source>
+                <target>Abbrechen</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.confirm.delete">
+                <source>Delete records</source>
+                <target>Einträge löschen</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.success.title">
+                <source>Missing file records removed</source>
+                <target>Fehlende Dateieinträge entfernt</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.partial.title">
+                <source>Missing file records partially removed</source>
+                <target>Fehlende Dateieinträge teilweise entfernt</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.success.message">
+                <source>Removed %1$d file record(s), skipped %2$d, failed %3$d, and removed %4$d reference record(s), %5$d metadata record(s), and %6$d processed file record(s).</source>
+                <target>%1$d Dateieintrag/-einträge entfernt, %2$d übersprungen, %3$d fehlgeschlagen sowie %4$d Referenzdatensatz/-datensätze, %5$d Metadatensatz/-datensätze und %6$d Processed-File-Datensatz/-datensätze entfernt.</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.error.title">
+                <source>Missing file records could not be removed</source>
+                <target>Fehlende Dateieinträge konnten nicht entfernt werden</target>
+            </trans-unit>
+            <trans-unit id="bulkDelete.error.noRecords">
+                <source>No missing file records were selected.</source>
+                <target>Es wurden keine fehlenden Dateieinträge ausgewählt.</target>
+            </trans-unit>
+            <trans-unit id="delete.confirm.title">
+                <source>Delete referenced missing file?</source>
+                <target>Referenzierte fehlende Datei löschen?</target>
+            </trans-unit>
+            <trans-unit id="delete.confirm.message">
+                <source>This missing file still has %d reference(s). Delete the sys_file entry and its sys_file_reference records?</source>
+                <target>Diese fehlende Datei hat noch %d Referenz(en). Den sys_file-Eintrag und seine sys_file_reference-Datensätze löschen?</target>
+            </trans-unit>
+            <trans-unit id="delete.confirm.cancel">
+                <source>Cancel</source>
+                <target>Abbrechen</target>
+            </trans-unit>
+            <trans-unit id="delete.confirm.delete">
+                <source>Delete entry and references</source>
+                <target>Eintrag und Referenzen löschen</target>
+            </trans-unit>
+            <trans-unit id="delete.success.title">
+                <source>Missing file removed</source>
+                <target>Fehlende Datei entfernt</target>
+            </trans-unit>
+            <trans-unit id="delete.success.message">
+                <source>Removed "%s" with %d reference(s), %d metadata record(s), and %d processed file record(s).</source>
+                <target>"%s" mit %d Referenz(en), %d Metadata-Datensatz/-sätzen und %d Processed-File-Datensatz/-sätzen entfernt.</target>
+            </trans-unit>
+            <trans-unit id="delete.error.title">
+                <source>Missing file could not be removed</source>
+                <target>Fehlende Datei konnte nicht entfernt werden</target>
+            </trans-unit>
+            <trans-unit id="restore.success.title">
+                <source>Missing file restored</source>
+                <target>Fehlende Datei wiederhergestellt</target>
+            </trans-unit>
+            <trans-unit id="restore.success.message">
+                <source>Restored "%s" to "%s".</source>
+                <target>"%s" nach "%s" wiederhergestellt.</target>
+            </trans-unit>
+            <trans-unit id="restore.success.reindexedMessage">
+                <source>File "%s" already existed at "%s". The existing file was reindexed.</source>
+                <target>Datei "%s" war unter "%s" bereits vorhanden. Die bestehende Datei wurde neu indexiert.</target>
+            </trans-unit>
+            <trans-unit id="restore.error.title">
+                <source>Missing file could not be restored</source>
+                <target>Fehlende Datei konnte nicht wiederhergestellt werden</target>
+            </trans-unit>
+            <trans-unit id="restore.error.missingUpload">
+                <source>No upload file was provided.</source>
+                <target>Es wurde keine Upload-Datei übergeben.</target>
+            </trans-unit>
+            <trans-unit id="empty.title">
+                <source>No missing files found</source>
+                <target>Keine fehlenden Dateien gefunden</target>
+            </trans-unit>
+            <trans-unit id="empty.message">
+                <source>The current filter does not match any sys_file records marked as missing.</source>
+                <target>Der aktuelle Filter findet keine als fehlend markierten sys_file-Datensätze.</target>
+            </trans-unit>
+            <trans-unit id="paging.label">
+                <source>Missing files pages</source>
+                <target>Seiten der fehlenden Dateien</target>
+            </trans-unit>
+            <trans-unit id="paging.previous">
+                <source>Previous</source>
+                <target>Zurück</target>
+            </trans-unit>
+            <trans-unit id="paging.next">
+                <source>Next</source>
+                <target>Weiter</target>
+            </trans-unit>
+            <trans-unit id="js.noRecordsTitle">
+                <source>No records</source>
+                <target>Keine Einträge</target>
+            </trans-unit>
+            <trans-unit id="js.noRecordsMessage">
+                <source>No missing files were found for this action.</source>
+                <target>Für diese Aktion wurden keine fehlenden Dateien gefunden.</target>
+            </trans-unit>
+            <trans-unit id="js.confirmDeleteReferencedTitle">
+                <source>Delete referenced files?</source>
+                <target>Referenzierte Dateien löschen?</target>
+            </trans-unit>
+            <trans-unit id="js.buttonCancel">
+                <source>Cancel</source>
+                <target>Abbrechen</target>
+            </trans-unit>
+            <trans-unit id="js.buttonDelete">
+                <source>Delete</source>
+                <target>Löschen</target>
+            </trans-unit>
+            <trans-unit id="js.errorTitle">
+                <source>Error</source>
+                <target>Fehler</target>
+            </trans-unit>
+            <trans-unit id="js.deleteErrorMessage">
+                <source>The missing file entry could not be deleted.</source>
+                <target>Der fehlende Dateieintrag konnte nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="js.restoreErrorMessage">
+                <source>The missing file entry could not be restored.</source>
+                <target>Der fehlende Dateieintrag konnte nicht wiederhergestellt werden.</target>
+            </trans-unit>
+            <trans-unit id="js.bulkDeleteErrorMessage">
+                <source>The missing file entries could not be deleted.</source>
+                <target>Die fehlenden Dateieinträge konnten nicht gelöscht werden.</target>
+            </trans-unit>
+            <trans-unit id="js.treeStorageLabel">
+                <source>Storage</source>
+                <target>Storage</target>
+            </trans-unit>
+            <trans-unit id="js.treeAllStorages">
+                <source>All storages</source>
+                <target>Alle Storages</target>
+            </trans-unit>
+            <trans-unit id="js.treeRefreshLabel">
+                <source>Refresh</source>
+                <target>Aktualisieren</target>
+            </trans-unit>
+            <trans-unit id="js.treeLoading">
+                <source>Loading...</source>
+                <target>Lädt...</target>
+            </trans-unit>
+            <trans-unit id="js.treeRequestFailed">
+                <source>Tree request failed</source>
+                <target>Baumanfrage fehlgeschlagen</target>
+            </trans-unit>
+            <trans-unit id="js.treeNoMissingFiles">
+                <source>No missing files</source>
+                <target>Keine fehlenden Dateien</target>
+            </trans-unit>
+            <trans-unit id="js.treeBadgeMissing">
+                <source>Missing files in folder (recursive)</source>
+                <target>Fehlende Dateien im Ordner (rekursiv)</target>
+            </trans-unit>
+            <trans-unit id="js.treeBadgeReferences">
+                <source>Of these, with references</source>
+                <target>Davon mit Referenzen</target>
+            </trans-unit>
+        </body>
+    </file>
+</xliff>
