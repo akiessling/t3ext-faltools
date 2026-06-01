@@ -149,7 +149,11 @@
                     </td>
                     <td>
                         <f:if condition="{file.referenceCount}">
-                            <f:then><span class="badge badge-warning">{file.referenceCount}</span></f:then>
+                            <f:then>
+                                <a class="" href="#" data-dispatch-action="TYPO3.InfoWindow.showItem" data-dispatch-args-list="sys_file,{file.uid}">
+                                    <span class="badge badge-warning">{file.referenceCount}</span>
+                                </a>
+                            </f:then>
                             <f:else><span class="badge badge-success">0</span></f:else>
                         </f:if>
                     </td>
