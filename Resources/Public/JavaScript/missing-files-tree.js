@@ -122,14 +122,14 @@ class MissingFilesTree extends LitElement {
           min-height: 0;
         }
 
-        .scaffold-content-navigation-component,
-        .scaffold-content-navigation-component .navigation-tree-container,
-        .scaffold-content-navigation-component .tree {
+        faltools-missing-files-tree.scaffold-content-navigation-component,
+        faltools-missing-files-tree.scaffold-content-navigation-component .navigation-tree-container,
+        faltools-missing-files-tree.scaffold-content-navigation-component .tree {
           flex: 1 1 auto !important;
           min-height: 0;
         }
 
-        .scaffold-content-navigation-component .tree > div {
+        faltools-missing-files-tree.scaffold-content-navigation-component .tree > div {
           flex: 0 0 auto !important;
         }
 
